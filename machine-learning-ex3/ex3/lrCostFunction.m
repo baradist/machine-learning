@@ -36,14 +36,15 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+hypothesis = sigmoid(X * theta);
 
+% should not be regularizing the theta(1) parameter
+theta(1) = 0;
 
+regCost = lambda * sum(theta .^ 2) / (2 * m);
+J = (-y' * log(hypothesis) - (1 - y)' * log(1 - hypothesis)) / m + regCost;
 
-
-
-
-
-
+grad = X' * (hypothesis - y) / m + lambda * theta / m;
 
 % =============================================================
 

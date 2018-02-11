@@ -19,19 +19,19 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+predictions = X * theta;
+sqrErrors = (predictions - y) .^ 2;
 
+% should not be regularizing the theta(1) parameter
+theta(1) = 0;
+regCost = lambda * sum(theta .^ 2) / (2 * m);
+J = 1 / (2 * m) * sum(sqrErrors) + regCost;
 
-
-
-
-
-
-
-
-
+regGrad = lambda * theta / m;
+grad = X' * (predictions - y) / m + regGrad;
 
 % =========================================================================
 
-grad = grad(:);
+%grad = grad(:);
 
 end

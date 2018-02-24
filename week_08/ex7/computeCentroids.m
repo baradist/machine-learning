@@ -15,7 +15,6 @@ function centroids = computeCentroids(X, idx, K)
 
 % You need to return the following variables correctly.
 % centroids = zeros(K, n);
-centroids = [];
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Go over every centroid and compute mean of all points that
@@ -26,10 +25,8 @@ centroids = [];
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-for i = 1:K
-  mean = sum(X .* (idx == i)) / sum(idx == i);
-  centroids = [centroids; mean];  
-end
+eye = eye(K);
+centroids = (eye(idx, :)' * X) .* (1 ./ sum(eye(idx, :)))';
 
 % =============================================================
 
